@@ -31,6 +31,7 @@
   - nginx
 ## helpful resources
 [monitoring](https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/)  
+[nginx](https://dev.to/thenjdevopsguy/creating-a-custom-resource-definition-in-kubernetes-2k7o)
 
 4. Gitlab
   - install gitlab community edition
@@ -53,8 +54,9 @@
   ```
   curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
   chmod +x openvpn-install.sh
+  ./openvpn-install.sh
   ```
   - use client.ovpn!
 ## helpful resources
-[openvpn-kuber-pod!](https://bugraoz93.medium.com/openvpn-client-in-a-pod-kubernetes-d3345c66b014)
+[openvpn-kuber-pod!](https://bugraoz93.medium.com/openvpn-client-in-a-pod-kubernetes-d3345c66b014)  
 [digitalocean](https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-an-openvpn-server-on-ubuntu-20-04#step-13-installing-the-client-configuration)
