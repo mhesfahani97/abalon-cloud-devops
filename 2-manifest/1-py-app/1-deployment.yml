@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-app
+  namespace: xaas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: python
+    spec:
+      containers:
+        - name: py-app
+          image: registry.gitlab.com/xass2/devops:latest
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5000
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+      imagePullSecrets:
+        - name: gitlab-registry
