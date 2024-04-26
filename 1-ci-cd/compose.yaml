@@ -1,0 +1,41 @@
+---
+services:
+  server:
+    image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
+    build:
+      context: .
+    ports:
+      - 8000:5000
+    environment:
+      - POSTGRES_PASSWORD_FILE=$PPF
+    depends_on:
+      db:
+        condition: service_healthy
+    secrets:
+      - db-password
+
+  db:
+    image: postgres
+    restart: always
+    user: postgres
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=example
+      - POSTGRES_PASSWORD_FILE=$PPF
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
+
+secrets:
+  db-password:
+    file: db/password.txt

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: py-app
-          image: registry.gitlab.com/xass2/devops:latest
+          image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5000

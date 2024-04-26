@@ -1,0 +1,4 @@
+---
+ci_access:
+  projects:
+    - id: root/k8s-data

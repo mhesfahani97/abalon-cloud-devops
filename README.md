@@ -26,6 +26,21 @@
     - copy webhook url and channel in to alerting configmap
   - nginx
 ## helpful resources
-[monitoring](https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/)
-4. Gitlab
+[monitoring](https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/)  
 
+4. Gitlab
+  - install gitlab community edition
+  - install kubectl on gitlab server
+  - connect gitlab to kubernetes cluster
+    - create a k8s-connection project
+      - create an agent `.gitlab/agents/k8s-connection/config.yaml`
+      - connect gitlab to kubernetes cluster
+  - create a new project `xaas`
+    - create three runner(shell)
+      - runner1 with dev tag
+      - runner2 with prod tag
+      - runner3 without tag
+    - create `dev` and `prod` environments
+    - write a .gitlab-ci.yml file
+    - create variable in gitlab UI `PPF=/run/secrets/db-password`
+      

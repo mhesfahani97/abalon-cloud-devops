@@ -1,0 +1,51 @@
+---
+variables:
+  KUBE_CONTEXT: root/k8s-connection:k8s-connection
+
+stages:
+  - build
+  - push
+  - deploy
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker build --tag="$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME" .
+
+push:
+  stage: push
+  script:
+    - docker push "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
+
+staging-deployment:
+  stage: deploy
+  only:
+    - develop
+  environment:
+    name: dev
+  tags:
+    - dev
+  script:
+    - docker compose pull
+    - docker compose down
+    - docker compose up -d
+
+production-deployment:
+  stage: deploy
+  only:
+    - main
+  when: manual
+  environment:
+    name: prod
+  tags:
+    - prod
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  script:
+    - kubectl config use-context $KUBE_CONTEXT
+    # select manifest to deploy
+    - kubectl apply -f $CI_PROJECT_DIR/kuber-manifests/
