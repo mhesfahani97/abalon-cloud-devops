@@ -5,7 +5,7 @@
 ## 0. Create Digitalocean Droplet
   - one droplet as master
   - one droplet as worker
-  - one droplet as VPN
+  - one droplet for VPN and gitlab
   - all of them should in same VPC network
 
 ## 1. Create Kubernetes Cluster
@@ -35,6 +35,7 @@
 
 ## 4. Gitlab
   - install gitlab community edition
+  - install docker
   - install kubectl on gitlab server
   - connect gitlab to kubernetes cluster
     - create a k8s-connection project
