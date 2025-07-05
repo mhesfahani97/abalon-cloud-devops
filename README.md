@@ -1,4 +1,4 @@
-# XaaS Task
+# Abalon Task
 ## Task Designer
 [Arash-Iranpak](https://www.linkedin.com/in/arash-iranpak)
 
@@ -41,7 +41,7 @@
     - create a k8s-connection project
       - create an agent `.gitlab/agents/k8s-connection/config.yaml`
       - connect gitlab to kubernetes cluster
-  - create a new project `xaas`
+  - create a new project `Abalon`
     - create three runner(shell)
       - runner1 with dev tag
       - runner2 with prod tag
